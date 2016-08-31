@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<!--
+	Identity by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Identity by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main">
+						<header>
+							<span class="avatar"><img src="images/avatar.png" alt="" /></span>
+							<h1 style="font-size:25px;color:#000">HASAN DEEB</h1>
+							<p><b style="font-size:25px;color:#000">M</b>ASTER <b style="font-size:25px;color:#000">I</b>N 
+							<b style="font-size:25px;color:#000">I</b>NFORMATIC <b style="font-size:25px;color:#000">E</b>NGINEERING</p>
+						</header>
+						
+						<hr />
+						<h2><b style="font-size:25px;color:#000">S</b>olve <b style="font-size:25px;color:#000">Q</b>uadratic <b style="font-size:25px;color:#000">E</b>quation</h2>
+						<form method="post" action="#" style="padding: 20px;" id='form_solve'>
+							<div class="field">
+								<input type="text"  id="a" placeholder="Enter (a) value" />
+							</div>
+							<div class="field">
+								<input type="text"  id="b" placeholder="Enter (b) value" />
+							</div>
+							<div class="field">
+								<input type="text"  id="c" placeholder="Enter (c) value" />
+							</div>
+							
+							
+							<ul class="actions">
+								<li><a onclick="solve()" class="button">SOLVE</a></li>
+							</ul>
+
+							<div class="field">
+								<h3 id='msg'></h3>
+								<h5 id='sol1' style="font-size: 11px;"></h5>
+								<h5 id='sol2' style="font-size: 11px;"></h5>
+							</div>
+
+						</form>
+						<hr />
+						
+						<footer>
+							<ul class="icons">
+								<li><a href="#" class="fa-twitter">Twitter</a></li>
+								<li><a href="#" class="fa-instagram">Instagram</a></li>
+								<li><a href="#" class="fa-facebook">Facebook</a></li>
+							</ul>
+						</footer>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li>&copy; Hasan Deeb</li><li>Design: <a href="https://www.facebook.com/aldeebiano">@ldeeb</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<!--[if lte IE 8]><script src="assets/js/respond.min.js"></script><![endif]-->
+			<script>
+				if ('addEventListener' in window) {
+					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+				}
+			</script>
+
+
+			<script type="text/javascript">
+
+			function solve(){
+
+				var a=$('#a').val();
+				var b=$('#b').val();
+				var c=$('#c').val();
+				
+
+
+$.get("solve",{a:a,b:b,c:c},function(data,statue){
+var form=$('#form_solve');
+var msg=$('#msg');
+var sol=$('#sol1');
+var sol2=$('#sol2');
+
+if(data.statue==1){
+	form.attr('style','box-shadow: 0px 0px 15px green;padding: 20px;')
+	msg.text(data.message);
+	msg.attr('style','color:green');
+	sol.text('First solution :'+data.x);
+	sol2.text('Second solution :'+data.y);
+}
+else 
+if(data.statue==0){
+	form.attr('style','box-shadow: 0px 0px 15px orange;padding: 20px;')
+	msg.attr('style','color:orange');
+	msg.text(data.message);
+	sol.text('The solution :'+data.x);
+	sol2.text('');
+
+}
+else {
+	form.attr('style','box-shadow: 0px 0px 15px red;padding: 20px;')
+	msg.text(data.message);
+	msg.attr('style','color:red');
+	sol.text('');
+	sol2.text('');
+}
+},'json');
+
+}
+
+			</script>
+
+
+
+	</body>
+</html>
